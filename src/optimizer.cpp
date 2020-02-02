@@ -44,12 +44,12 @@ RotQuat RotationOptimizer::InitialGuess()
 
   R_ = {static_cast<float>(R_quat.x()), static_cast<float>(R_quat.y()),
         static_cast<float>(R_quat.z()), static_cast<float>(R_quat.w())};
-  return R_;
+  return GetQuat();
 }
 
 float RotationOptimizer::Error() const
 {
-  Eigen::Matrix3d rot = RToRotMat(R_);
+  Eigen::Matrix3d rot = RToRotMat(GetQuat());
 
   Eigen::MatrixXd src_mat = rot * StdVecToMat(src_).transpose();
   Eigen::MatrixXd dst_mat = StdVecToMat(dst_).transpose();
