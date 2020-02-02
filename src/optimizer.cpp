@@ -22,6 +22,12 @@ static Eigen::MatrixXd StdVecToMat(const std::vector<float>& vec)
   return mat;
 }
 
+static Eigen::Matrix3d RToRotMat(const RotQuat& quat)
+{
+  Eigen::Quaterniond quat_(quat[3], quat[0], quat[1], quat[2]);
+  return Eigen::Matrix3d(quat_);
+}
+
 RotationOptimizer::RotationOptimizer(const std::vector<float>& src,
                                      const std::vector<float>& dst)
   : src_(src), dst_(dst)
@@ -39,6 +45,21 @@ RotQuat RotationOptimizer::InitialGuess()
   R_ = {static_cast<float>(R_quat.x()), static_cast<float>(R_quat.y()),
         static_cast<float>(R_quat.z()), static_cast<float>(R_quat.w())};
   return R_;
+}
+
+float RotationOptimizer::Error() const
+{
+  Eigen::Matrix3d rot = RToRotMat(R_);
+
+  Eigen::MatrixXd src_mat = rot * StdVecToMat(src_).transpose();
+  Eigen::MatrixXd dst_mat = StdVecToMat(dst_).transpose();
+  float error = 0;
+  for (size_t i = 0; i < src_mat.cols(); i++)
+  {
+    error += (src_mat.col(i) - dst_mat.col(i)).norm();
+  }
+
+  return error;
 }
 
 std::tuple<float, RotQuat> RotationOptimizer::Optimize(size_t N)

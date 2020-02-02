@@ -21,6 +21,8 @@ public:
 
   std::tuple<float, RotQuat> Optimize(size_t N);
 
+  float Error() const;
+
   RotQuat InitialGuess();
 
 private:

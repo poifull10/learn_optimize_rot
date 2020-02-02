@@ -13,11 +13,7 @@ int main(int argc, char** argv)
   rot::print(srcDataLoader.points());
 
   const auto rotQuat = rotOpt.InitialGuess();
-
-  for (const auto& v : rotQuat)
-  {
-    std::cout << v << std::endl;
-  }
+  rotOpt.Error();
 
   return 0;
 }
