@@ -13,7 +13,9 @@ int main(int argc, char** argv)
   rot::print(srcDataLoader.points());
 
   const auto rotQuat = rotOpt.InitialGuess();
-  std::cout << rotOpt.Error() << std::endl;
+  rot::write("init.csv", rotQuat);
+  rotOpt.Optimize(30);
+  rot::write("opt.csv", rotOpt.GetQuat());
 
   return 0;
 }
