@@ -26,4 +26,6 @@ T = TE.compute_transformation(src_pcd, dst_pcd, corres)
 # print(R.Rotation.from_dcm(T[0:3, 0:3]).as_quat())
 quat = R.Rotation.from_dcm(T[0:3, 0:3]).as_quat()
 np.savetxt('answer.csv', quat)
-# o3d.visualization.draw_geometries([src_pcd.transform(T), dst_pcd])
+o3d.visualization.draw_geometries([src_pcd.transform(T), dst_pcd])
+
+

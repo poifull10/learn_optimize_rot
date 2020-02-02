@@ -17,16 +17,17 @@ def generateData(N: int,
 
     for i in range(N):
         theta = thetas[i]
-        print(theta)
+        # print(theta)
         rMat = R.Rotation.from_rotvec(theta).as_matrix()
         t = r * np.array([1, 0, 0])
         src[i] = rMat @ t
         dst[i] = rotation @ rMat @ t + noise[i]
+        print(noise[i])
 
     return src, dst
 
 
 if __name__ == "__main__":
-    src, dst = generateData(5, 10.0, [-np.pi / 4, np.pi / 3, np.pi / 10])
+    src, dst = generateData(10, 10.0, [-np.pi / 4, np.pi / 3, np.pi / 10], 1)
     np.savetxt('src.csv', src)
     np.savetxt('dst.csv', dst)
