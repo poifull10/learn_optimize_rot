@@ -51,8 +51,9 @@ float RotationOptimizer::Error() const
 {
   Eigen::Matrix3d rot = RToRotMat(GetQuat());
 
-  Eigen::MatrixXd src_mat = rot * StdVecToMat(src_).transpose();
-  Eigen::MatrixXd dst_mat = StdVecToMat(dst_).transpose();
+  Eigen::MatrixXd src_mat = rot * StdVecToMat(src_);
+  Eigen::MatrixXd dst_mat = StdVecToMat(dst_);
+
   float error = 0;
   for (size_t i = 0; i < src_mat.cols(); i++)
   {

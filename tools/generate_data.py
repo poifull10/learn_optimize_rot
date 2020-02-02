@@ -27,6 +27,6 @@ def generateData(N: int,
 
 
 if __name__ == "__main__":
-    src, dst = generateData(3, 10.0, [-np.pi / 4, np.pi / 3, np.pi / 10])
+    src, dst = generateData(5, 10.0, [-np.pi / 4, np.pi / 3, np.pi / 10])
     np.savetxt('src.csv', src)
     np.savetxt('dst.csv', dst)
