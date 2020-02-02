@@ -5,8 +5,8 @@ import scipy.spatial.transform.rotation as R
 src = np.loadtxt('data/src.csv')
 dst = np.loadtxt('data/dst.csv')
 
-print(src)
-print(dst)
+# print(src)
+# print(dst)
 
 src_pcd = o3d.geometry.PointCloud()
 src_pcd.points = o3d.utility.Vector3dVector(src)
@@ -22,7 +22,7 @@ for i in range(len(src)):
 
 TE = o3d.registration.TransformationEstimationPointToPoint()
 T = TE.compute_transformation(src_pcd, dst_pcd, corres)
-print(T)
+# print(T)
 print(R.Rotation.from_dcm(T[0:3, 0:3]).as_quat())
 
 o3d.visualization.draw_geometries([src_pcd.transform(T), dst_pcd])
