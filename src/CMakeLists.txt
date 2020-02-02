@@ -1,5 +1,5 @@
 
-add_library(rot_lib dataloader.cpp optimizer.cpp)
+add_library(rot_lib dataloader.cpp optimizer.cpp utility.cpp)
 set_property(TARGET rot_lib PROPERTY CXX_STANDARD 17)
 
 target_link_libraries(rot_lib Eigen3 stdc++fs)
